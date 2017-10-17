@@ -27,8 +27,10 @@ namespace percolation_threshold
             double tries = new double();
             Console.WriteLine("enter array size");
             size = int.Parse(Console.ReadLine());
+            methods.size = size;
             Console.WriteLine("enter simulation time");
             time = int.Parse(Console.ReadLine());
+            methods.time = time;
             //ArrayBuilder();
             methods.ArrayBuilder();
             //Virtalpoint();
@@ -38,7 +40,8 @@ namespace percolation_threshold
                 while (methods.Connected(0, 0, 0, size - 1) == false)
                 {
                     methods.RandomSelection();
-                    methods.Connector(x,y);
+                    //methods.Connector(methods.x, methods.y);
+                    methods.Connector(Data.tempX, Data.tempY);
                     tries++;
                 }
                 Console.WriteLine(tries / Math.Pow(size, 2));
@@ -141,6 +144,12 @@ namespace percolation_threshold
         */
     }
 
+    class Data
+    {
+        public static int tempX { get; set; }
+        public static int tempY { get; set; }
+    }
+
     class Methods
     {
         public int[,] array;
@@ -157,9 +166,13 @@ namespace percolation_threshold
 
         public void ArrayBuilder()
         {
+            Console.WriteLine("size is: " + size);
+            Console.ReadLine();
             int m = 0;
+
             array = new int[size - 1, size - 1];
             index = new int[size - 1 * size - 1];
+
             for (int x = 0; x <= size - 1; x++)
             {
                 for (int y = 0; y <= size - 1; y++)
@@ -171,12 +184,16 @@ namespace percolation_threshold
                 }
             }
         }
+
         public void RandomSelection()
         {
             x = rnd1.Next(-1, size + 1);
+            Data.tempX = x;
             y = rnd2.Next(-1, size + 1);
+            Data.tempY = y;
             array[x, y] = 0;
         }
+
         public void Connector(int x, int y)
         {
             if (x - 1 >= 0)
@@ -208,6 +225,7 @@ namespace percolation_threshold
                 }
             }
         }
+
         private int Root(int x, int y)
         {
             int i = x * size + y;
@@ -218,6 +236,7 @@ namespace percolation_threshold
             }
             return i;
         }
+
         public void Union(int x, int y, int a, int b)
         {
             int m = x * size + y;
