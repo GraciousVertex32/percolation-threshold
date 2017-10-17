@@ -29,6 +29,7 @@ namespace percolation_threshold
             size = int.Parse(Console.ReadLine());
             Console.WriteLine("enter simulation time");
             time = int.Parse(Console.ReadLine());
+            methods.size = size;
             //ArrayBuilder();
             methods.ArrayBuilder();
             //Virtalpoint();
@@ -38,7 +39,7 @@ namespace percolation_threshold
                 while (methods.Connected(0, 0, 0, size - 1) == false)
                 {
                     methods.RandomSelection();
-                    methods.Connector(x,y);
+                    methods.Connector(methods.x,methods.y);
                     tries++;
                 }
                 Console.WriteLine(tries / Math.Pow(size, 2));
@@ -158,14 +159,15 @@ namespace percolation_threshold
         public void ArrayBuilder()
         {
             int m = 0;
-            array = new int[size - 1, size - 1];
-            index = new int[size - 1 * size - 1];
+            array = new int[size, size];
+            index = new int[size * size];
+            amount = new int[size * size];
             for (int x = 0; x <= size - 1; x++)
             {
                 for (int y = 0; y <= size - 1; y++)
                 {
                     array[x, y] = 1;
-                    index[x * size + y] = m;
+                    index[(x * size) + y] = m;
                     amount[x * size + y] = 1;
                     m++;
                 }
@@ -173,8 +175,8 @@ namespace percolation_threshold
         }
         public void RandomSelection()
         {
-            x = rnd1.Next(-1, size + 1);
-            y = rnd2.Next(-1, size + 1);
+            x = rnd1.Next(0, size);
+            y = rnd2.Next(0, size);
             array[x, y] = 0;
         }
         public void Connector(int x, int y)
