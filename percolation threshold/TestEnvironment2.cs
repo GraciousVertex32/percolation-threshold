@@ -32,7 +32,6 @@ namespace percolation_threshold
             methods.size = size;
             methods.ArrayBuilder();
             methods.Virtalpoint();
-            double average = new double();
             for (int i = 0; i < times; i++)
             {
                 while (methods.Connected(0, 0, size - 1, size - 1) == false)
@@ -53,10 +52,8 @@ namespace percolation_threshold
                     tries++;
                 }
                 Console.WriteLine(tries / Math.Pow(size, 2));
-                average += tries / Math.Pow(size, 2);
+                Console.ReadLine();
             }
-            Console.WriteLine(average / times);
-            Console.ReadLine();
         }
 
         /*
@@ -165,8 +162,8 @@ namespace percolation_threshold
         public int x = 0;
         public int y = 0;
         public double tries = 0;
-        Random rnd1 = new Random(12421);
-        Random rnd2 = new Random(12312);
+        Random rnd1 = new Random(2333);
+        Random rnd2 = new Random(3424);
         private Program program = new Program();
 
         public void ArrayBuilder()
@@ -189,7 +186,7 @@ namespace percolation_threshold
         public void RandomSelection()
         {
             int k = 0;
-            while (k == 0)
+            while(k==0)
             {
                 x = rnd1.Next(0, size);
                 y = rnd2.Next(0, size);
