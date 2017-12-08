@@ -3,22 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace percolation_threshold
 {
     class Program
     {
-        //public int[,] array;
-        //public int[] index;
-        //public int[] amount;
-        //public int size = 0;
-        //public int time = 0;
-        //public int x = 0;
-        //public int y = 0;
-        //public double tries = 0;
-        //Random rnd1 = new Random();
-        //Random rnd2 = new Random();
-        //private Program program = new Program();
         static void Main(string[] args)
         {
             int size = new int();
@@ -165,10 +155,9 @@ namespace percolation_threshold
         public int x = 0;
         public int y = 0;
         public double tries = 0;
-        Random rnd1 = new Random(12421);
-        Random rnd2 = new Random(12312);
+        Random rnd1 = new Random(782);
+        Random rnd2 = new Random(233);
         private Program program = new Program();
-
         public void ArrayBuilder()
         {
             int m = 0;
